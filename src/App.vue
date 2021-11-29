@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <Header />
+        <Header @genMovieList="genArray" />
 
         <main>
-            <MovieList />
+            <MovieList :list="this.movieList"/>
         </main>
     </div> 
 </template>
@@ -13,10 +13,21 @@ import Header from '@/components/Header.vue'
 import MovieList from '@/components/MovieList.vue'
 export default {
     name: 'App',
+    data() {
+        return {
+            movieList: null,
+        }
+    },
     components: {
         Header,
         MovieList,
     },
+    methods: {
+      genArray(list) {
+          this.movieList = list;
+          console.log(this.movieList);
+      }
+    }
     
 }
 </script>

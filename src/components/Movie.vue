@@ -1,10 +1,10 @@
 <template>
     <li class="movie">
         <ul>
-            <li>Titolo</li>
-            <li>Titolo Originale</li>
-            <li>Lingua</li>
-            <li>Voto</li>
+            <li>{{ movieTitle }}</li>
+            <li>{{ movieOriginalTitle }} </li>
+            <li>{{ movieLanguage }}</li>
+            <li>{{ movieVote }}</li>
         </ul>
     </li>
 </template>
@@ -12,6 +12,12 @@
 <script>
 export default {
     name: 'Movie',
+    props: {
+        movieTitle: String,
+        movieOriginalTitle: String,
+        movieLanguage: String,
+        movieVote: String,
+    },
 }
 </script>
 

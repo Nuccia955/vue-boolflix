@@ -33,7 +33,6 @@ export default {
             })
             .then(response => {
                 // handle success
-                console.log(response.data.results);
                 this.$emit('genMovieList', response.data.results)
             })
             .catch(error => {
