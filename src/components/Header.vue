@@ -28,7 +28,7 @@ export default {
             axios.get(this.APIurl, {
                 params: {
                     api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
-                    query: 'Fantozzi',
+                    query: `${this.searchInput}`,
                 }
             })
             .then(response => {
