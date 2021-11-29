@@ -44,7 +44,7 @@ export default {
             .catch(error => {
                 // handle error
                 console.log(error);
-                this.$emit('errorMessage', `${error} ==> Please type something to start searching`);
+                this.$emit('errorMessage', `${error} ==> Please try again`);
             })
         },
     }

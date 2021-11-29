@@ -2,7 +2,9 @@
     <li class="movie">
         <ul>
             <li>{{ movieTitle }}</li>
-            <li>{{ movieOriginalTitle }} </li>
+            <li v-if="movieOriginalTitle !== movieTitle">
+                {{ movieOriginalTitle }} 
+            </li>
             <li>
                 <img 
                     v-if="movieLanguage === 'en' || movieLanguage === 'it'" 
