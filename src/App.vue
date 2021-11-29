@@ -5,10 +5,11 @@
         />
 
         <main>
-          <h3 ref="errorMessage" v-if="this.errorMessage">{{ this.errorMessage }}</h3>
           <MovieList 
+              v-if="movieList && this.errorMessage === ''"
               :list="this.movieList"
           />
+          <h3 ref="errorMessage" v-else>{{ this.errorMessage }}</h3>
         </main>
     </div> 
 </template>
