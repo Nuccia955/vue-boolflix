@@ -35,12 +35,16 @@ export default {
             .then(response => {
                 // handle success
                 this.$emit('genMovieList', response.data.results)
-                this.$emit('errorMessage', '')
+                if(response.data.results.length > 0) {
+                    this.$emit('errorMessage', '')
+                } else {
+                    this.$emit('errorMessage', 'Not Found')
+                }
             })
             .catch(error => {
                 // handle error
                 console.log(error);
-                this.$emit('errorMessage', `${error} ==> Not Found`);
+                this.$emit('errorMessage', `${error} ==> Please type something to start searching`);
             })
         },
     }
