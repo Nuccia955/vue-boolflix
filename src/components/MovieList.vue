@@ -27,8 +27,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    ul {
-        list-style: none;
-        padding: 0;
+    .movie-list {
+        padding: 30px 10px;
+        ul {
+            list-style: none;
+            padding: 0;
+        }
     }
 </style>

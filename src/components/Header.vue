@@ -35,10 +35,12 @@ export default {
             .then(response => {
                 // handle success
                 this.$emit('genMovieList', response.data.results)
+                this.$emit('errorMessage', '')
             })
             .catch(error => {
                 // handle error
                 console.log(error);
+                this.$emit('errorMessage', `${error} ==> Not Found`);
             })
         },
     }

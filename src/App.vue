@@ -1,9 +1,14 @@
 <template>
     <div id="app">
-        <Header @genMovieList="genArray" />
+        <Header @genMovieList="genList"
+                @errorMessage="genErrorMessage" 
+        />
 
         <main>
-            <MovieList :list="this.movieList"/>
+          <h3 ref="errorMessage" v-if="this.errorMessage">{{ this.errorMessage }}</h3>
+          <MovieList 
+              :list="this.movieList"
+          />
         </main>
     </div> 
 </template>
@@ -16,6 +21,7 @@ export default {
     data() {
         return {
             movieList: null,
+            errorMessage: null,
         }
     },
     components: {
@@ -23,9 +29,11 @@ export default {
         MovieList,
     },
     methods: {
-      genArray(list) {
+      genList(list) {
           this.movieList = list;
-          console.log(this.movieList);
+      },
+      genErrorMessage(error) {
+          this.errorMessage = `${error}`;
       }
     }
     
