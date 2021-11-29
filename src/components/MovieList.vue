@@ -7,7 +7,7 @@
                 :movieTitle="`${movie.title}`"
                 :movieOriginalTitle="`${movie.original_title}`"
                 :movieLanguage="`${movie.original_language}`"
-                :movieVote="`${movie.vote_count}`"
+                :movieVoteAverage="`${movie.vote_average}`"
             />
         </ul>
     </section>

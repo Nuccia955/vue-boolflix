@@ -2,7 +2,7 @@
     <header>
         <input 
             type="text" 
-            placeholder="Search movie"
+            placeholder="Search movie or series"
             v-model="searchInput"
         >
         <button 
@@ -43,9 +43,9 @@ export default {
             })
             .catch(error => {
                 // handle error
-                console.log(error);
                 this.$emit('errorMessage', `${error} ==> Please try again`);
-            })
+            });
+            this.searchInput = '';
         },
     }
 }

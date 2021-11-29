@@ -1,18 +1,26 @@
 <template>
     <li class="movie">
         <ul>
-            <li>{{ movieTitle }}</li>
             <li v-if="movieOriginalTitle !== movieTitle">
+                Titolo:
+                {{ movieTitle }}
+            </li>
+            <li>
+                Titolo Originale:
                 {{ movieOriginalTitle }} 
             </li>
             <li>
+                Lingua Originale:
                 <img 
                     v-if="movieLanguage === 'en' || movieLanguage === 'it'" 
                     :src="require(`../assets/${movieLanguage}.png`)" :alt="movieLanguage"
                 >
                 <span v-else>{{ movieLanguage }}</span>
             </li>
-            <li>{{ movieVote }}</li>
+            <li>
+                Voto:
+                {{ movieVoteAverage }}
+            </li>
         </ul>
     </li>
 </template>
@@ -24,7 +32,7 @@ export default {
         movieTitle: String,
         movieOriginalTitle: String,
         movieLanguage: String,
-        movieVote: String,
+        movieVoteAverage: String,
     },
 }
 </script>
