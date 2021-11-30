@@ -1,10 +1,11 @@
 <template>
-    <section class="list">
+    <section class="list w-50">
         <h3>{{ sectionTitle }}</h3>
         <ul v-if="list.length > 0">
             <Card  
                 v-for="item in list" 
                 :key="`movie ${item.id}`"
+                :img="item.poster_path"
                 :title="item.title || item.name"
                 :originalTitle="item.original_title || item.original_name"
                 :language="item.original_language"

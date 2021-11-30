@@ -1,6 +1,9 @@
 <template>
     <li class="card">
         <ul>
+            <li>
+                <img :src="`https://image.tmdb.org/t/p/w92${img}`" :alt="title">
+            </li>
             <li v-if="originalTitle !== title">
                 Titolo:
                 {{ title }}
@@ -9,7 +12,7 @@
                 Titolo Originale:
                 {{ originalTitle }} 
             </li>
-            <li>
+            <li class="flag">
                 Lingua Originale:
                 <img 
                     v-if="availableFlag" 
@@ -39,6 +42,7 @@ export default {
         }
     },
     props: {
+        img: String,
         title: String,
         originalTitle: String,
         language: String,
@@ -54,7 +58,7 @@ li.card {
         list-style: disc;
         li {
             margin-bottom: 5px;
-            img {
+            &.flag img {
                 max-width: 30px;
             }
         }

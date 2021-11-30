@@ -2,13 +2,13 @@
     <div id="app">
         <Header @performSearch="getList" />
 
-        <main>
-            <CardList 
+        <main class="w-100">
+            <CardList
                 sectionTitle="Movies"
                 v-if="movieList"
                 :list="this.movieList"
             />
-            <CardList 
+            <CardList
                 sectionTitle="Series"
                 v-if="seriesList"
                 :list="this.seriesList"
@@ -80,5 +80,13 @@ export default {
 </script>
 
 <style lang="scss">
-
+.w-50 {
+  width: 50%;
+}
+.w-100 {
+  width: 100vw;
+}
+main {
+  display: flex;
+}
 </style>
