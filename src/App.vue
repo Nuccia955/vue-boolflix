@@ -3,7 +3,7 @@
         <Header @performSearch="getList" />
 
         <main>
-            <MovieList 
+            <CardList 
                 v-if="movieList && this.errorMessage === ''"
                 :list="this.movieList"
             />
@@ -15,7 +15,7 @@
 <script>
 import axios from 'axios'
 import Header from '@/components/Header.vue'
-import MovieList from '@/components/MovieList.vue'
+import CardList from '@/components/CardList.vue'
 export default {
     name: 'App',
     data() {
@@ -27,7 +27,7 @@ export default {
     },
     components: {
         Header,
-        MovieList,
+        CardList,
     },
     methods: {
       getList(searchInput) {

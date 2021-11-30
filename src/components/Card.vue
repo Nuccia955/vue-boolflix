@@ -1,25 +1,25 @@
 <template>
     <li class="movie">
         <ul>
-            <li v-if="movieOriginalTitle !== movieTitle">
+            <li v-if="originalTitle !== title">
                 Titolo:
-                {{ movieTitle }}
+                {{ title }}
             </li>
             <li>
                 Titolo Originale:
-                {{ movieOriginalTitle }} 
+                {{ originalTitle }} 
             </li>
             <li>
                 Lingua Originale:
                 <img 
-                    v-if="movieLanguage === 'en' || movieLanguage === 'it'" 
-                    :src="require(`../assets/${movieLanguage}.png`)" :alt="movieLanguage"
+                    v-if="language === 'en' || language === 'it'" 
+                    :src="require(`../assets/${language}.png`)" :alt="language"
                 >
-                <span v-else>{{ movieLanguage }}</span>
+                <span v-else>{{ language }}</span>
             </li>
             <li>
                 Voto:
-                {{ movieVoteAverage }}
+                {{ voteAverage }}
             </li>
         </ul>
     </li>
@@ -27,12 +27,12 @@
 
 <script>
 export default {
-    name: 'Movie',
+    name: 'Card',
     props: {
-        movieTitle: String,
-        movieOriginalTitle: String,
-        movieLanguage: String,
-        movieVoteAverage: String,
+        title: String,
+        originalTitle: String,
+        language: String,
+        voteAverage: Number,
     },
 }
 </script>
