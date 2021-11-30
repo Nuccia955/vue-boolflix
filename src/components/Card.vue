@@ -1,5 +1,5 @@
 <template>
-    <li class="movie">
+    <li class="card">
         <ul>
             <li v-if="originalTitle !== title">
                 Titolo:
@@ -12,7 +12,7 @@
             <li>
                 Lingua Originale:
                 <img 
-                    v-if="language === 'en' || language === 'it'" 
+                    v-if="availableFlag" 
                     :src="require(`../assets/${language}.png`)" :alt="language"
                 >
                 <span v-else>{{ language }}</span>
@@ -28,6 +28,16 @@
 <script>
 export default {
     name: 'Card',
+    data() {
+        return {
+            flags: ['en', 'it'],
+        }
+    },
+    computed: {
+        availableFlag() {
+            return this.flags.includes(this.language);
+        }
+    },
     props: {
         title: String,
         originalTitle: String,
@@ -38,7 +48,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-li.movie {
+li.card {
     margin: 50px 0;
     ul {
         list-style: disc;

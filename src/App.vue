@@ -30,31 +30,30 @@ export default {
         CardList,
     },
     methods: {
-      getList(searchInput) {
-          if(searchInput !== '') {
-              axios.get(this.APIurlMovie, {
-                  params: {
-                      api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
-                      query: searchInput,
-                      language: 'it-IT',
-                  }
-              })
-              .then(response => {
-                  // handle success
-                  this.movieList = response.data.results;
-                  if(response.data.results.length > 0) {
-                      this.errorMessage = '';
-                  } else {
-                      this.errorMessage = 'Not Found';
-                  }
-              })
-              .catch(error => {
-                  // handle error
-                  this.errorMessage = `${error} ==> Please try again`;
-              });
-              searchInput = '';
-          }
-      },
+        getList(searchInput) {
+            if(searchInput !== '') {
+                axios.get(this.APIurlMovie, {
+                    params: {
+                        api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                        query: searchInput,
+                        language: 'it-IT',
+                    }
+                })
+                .then(response => {
+                    // handle success
+                    this.movieList = response.data.results;
+                    if(response.data.results.length > 0) {
+                        this.errorMessage = '';
+                    } else {
+                        this.errorMessage = 'Not Found';
+                    }
+                })
+                .catch(error => {
+                    // handle error
+                    this.errorMessage = `${error} ==> Please try again`;
+                });
+            }
+        },
     }
     
 }
