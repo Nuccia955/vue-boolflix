@@ -1,9 +1,9 @@
 <template>
     <li class="card">
+        <div class="cover">
+            <img :src="`https://image.tmdb.org/t/p/w92${img}`" :alt="title">
+        </div>
         <ul>
-            <li>
-                <img :src="`https://image.tmdb.org/t/p/w92${img}`" :alt="title">
-            </li>
             <li v-if="originalTitle !== title">
                 Titolo:
                 {{ title }}
@@ -54,12 +54,20 @@ export default {
 <style scoped lang="scss">
 li.card {
     margin: 50px 0;
+    display: flex;
+    .cover {
+        margin-right: 30px;
+    }
     ul {
+        flex-grow: 1;
+        padding: 0;
         list-style: disc;
         li {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             &.flag img {
-                max-width: 30px;
+                width: 30px;
+                height: 15px;
+                object-fit: cover;
             }
         }
     }

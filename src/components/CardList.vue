@@ -1,10 +1,15 @@
 <template>
-    <section class="list w-50">
-        <h3>{{ sectionTitle }}</h3>
+    <section class="list">
+        <h2>{{ sectionTitle }}</h2>
+        <span> 
+            <strong>{{ list.length }}</strong>
+            results found for
+            <strong>{{ searchInput }}</strong>
+        </span>
         <ul v-if="list.length > 0">
             <Card  
                 v-for="item in list" 
-                :key="`movie ${item.id}`"
+                :key="item.id"
                 :img="item.poster_path"
                 :title="item.title || item.name"
                 :originalTitle="item.original_title || item.original_name"
@@ -12,7 +17,6 @@
                 :voteAverage="item.vote_average"
             />
         </ul>
-        <h4 v-else>Not found</h4>
     </section>
 </template>
 
@@ -23,6 +27,7 @@ export default {
     props: {
         list: Array,
         sectionTitle: String,
+        searchInput: String,
     },
     components: {
         Card,
@@ -32,6 +37,7 @@ export default {
 
 <style scoped lang="scss">
     .list {
+        width: 50%;
         padding: 30px 10px;
         ul {
             list-style: none;

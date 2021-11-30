@@ -2,18 +2,20 @@
     <div id="app">
         <Header @performSearch="getList" />
 
-        <main class="w-100">
+        <main>
             <CardList
                 sectionTitle="Movies"
                 v-if="movieList"
                 :list="this.movieList"
+                :searchInput="searchInput"
             />
             <CardList
                 sectionTitle="Series"
                 v-if="seriesList"
                 :list="this.seriesList"
+                :searchInput="searchInput"
             />
-            <h3 v-if="errorMessage"> {{ errorMessage }} </h3>
+            <h3 class="w-100" v-if="errorMessage"> {{ errorMessage }} </h3>
         </main>
     </div> 
 </template>
@@ -30,6 +32,7 @@ export default {
             APIurlSeries: 'https://api.themoviedb.org/3/search/tv',
             movieList: null,
             seriesList: null,
+            searchInput: null,
             errorMessage: null,
         }
     },
@@ -40,6 +43,7 @@ export default {
     methods: {
         getList(searchInput) {
             if(searchInput !== '') {
+                this.searchInput = searchInput;
                 axios.get(this.APIurlMovie, {
                     params: {
                         api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
@@ -55,8 +59,6 @@ export default {
                     // handle error
                     this.errorMessage = `${error} ==> Please try again`;
                 });
-            }
-            if(searchInput !== '') {
                 axios.get(this.APIurlSeries, {
                     params: {
                         api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
@@ -80,13 +82,11 @@ export default {
 </script>
 
 <style lang="scss">
-.w-50 {
-  width: 50%;
-}
-.w-100 {
-  width: 100vw;
-}
-main {
-  display: flex;
+#app {
+  font-family: sans-serif;
+  main {
+    display: flex;
+    padding: 50px 100px;
+  }
 }
 </style>
