@@ -4,10 +4,16 @@
 
         <main>
             <CardList 
-                v-if="movieList && this.errorMessage === ''"
+                sectionTitle="Movies"
+                v-if="movieList"
                 :list="this.movieList"
             />
-            <h3 ref="errorMessage" v-else>{{ this.errorMessage }}</h3>
+            <CardList 
+                sectionTitle="Series"
+                v-if="seriesList"
+                :list="this.seriesList"
+            />
+            <h3 v-if="errorMessage"> {{ errorMessage }} </h3>
         </main>
     </div> 
 </template>
@@ -21,7 +27,9 @@ export default {
     data() {
         return {
             APIurlMovie: 'https://api.themoviedb.org/3/search/movie',
+            APIurlSeries: 'https://api.themoviedb.org/3/search/tv',
             movieList: null,
+            seriesList: null,
             errorMessage: null,
         }
     },
@@ -42,11 +50,23 @@ export default {
                 .then(response => {
                     // handle success
                     this.movieList = response.data.results;
-                    if(response.data.results.length > 0) {
-                        this.errorMessage = '';
-                    } else {
-                        this.errorMessage = 'Not Found';
+                })
+                .catch(error => {
+                    // handle error
+                    this.errorMessage = `${error} ==> Please try again`;
+                });
+            }
+            if(searchInput !== '') {
+                axios.get(this.APIurlSeries, {
+                    params: {
+                        api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                        query: searchInput,
+                        language: 'it-IT',
                     }
+                })
+                .then(response => {
+                    // handle success
+                    this.seriesList = response.data.results;
                 })
                 .catch(error => {
                     // handle error
