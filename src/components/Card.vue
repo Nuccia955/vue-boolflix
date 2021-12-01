@@ -22,7 +22,11 @@
             </li>
             <li>
                 Voto:
-                {{ voteAverage }}
+                <span class="star" 
+                    v-for="(star,index) in stars" :key="`star${index}`" 
+                >
+                    <i class="fas fa-star"></i>
+                </span>
             </li>
         </ul>
     </li>
@@ -34,12 +38,13 @@ export default {
     data() {
         return {
             flags: ['en', 'it'],
+            stars: Math.ceil(this.voteAverage / 2),
         }
     },
     computed: {
         availableFlag() {
             return this.flags.includes(this.language);
-        }
+        },
     },
     props: {
         img: String,

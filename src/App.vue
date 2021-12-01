@@ -3,18 +3,20 @@
         <Header @performSearch="getList" />
 
         <main>
-            <CardList
-                sectionTitle="Movies"
-                v-if="movieList"
-                :list="this.movieList"
-                :searchInput="searchInput"
-            />
-            <CardList
-                sectionTitle="Series"
-                v-if="seriesList"
-                :list="this.seriesList"
-                :searchInput="searchInput"
-            />
+            <section class="lists">
+                <CardList
+                    sectionTitle="Movies"
+                    v-if="movieList"
+                    :list="this.movieList"
+                    :searchInput="searchInput"
+                />
+                <CardList
+                    sectionTitle="Series"
+                    v-if="seriesList"
+                    :list="this.seriesList"
+                    :searchInput="searchInput"
+                />
+            </section>
             <h3 class="w-100" v-if="errorMessage"> {{ errorMessage }} </h3>
         </main>
     </div> 
@@ -85,8 +87,10 @@ export default {
 #app {
   font-family: sans-serif;
   main {
-    display: flex;
     padding: 50px 100px;
+    .lists {
+      display: flex;
+    }
   }
 }
 </style>
