@@ -14,6 +14,7 @@
                 :title="item.title || item.name"
                 :originalTitle="item.original_title || item.original_name"
                 :language="item.original_language"
+                :overview="item.overview"
                 :voteAverage="item.vote_average"
             />
         </ul>
@@ -37,11 +38,16 @@ export default {
 
 <style scoped lang="scss">
     .list {
-        width: 50%;
+        strong {
+            color: rgb(220, 26, 40);
+        }
         padding: 30px 10px;
         ul {
+            width: 100%;
             list-style: none;
             padding: 0;
+            display: flex;
+            flex-wrap: wrap;
         }
     }
 </style>

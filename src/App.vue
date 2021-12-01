@@ -84,13 +84,21 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: sans-serif;
-  main {
-    padding: 50px 100px;
-    .lists {
-      display: flex;
+body {
+  color: white;
+  margin: 0;
+  background-color: #212529;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  }
+    #app {
+      font-family: sans-serif;
+      cursor: default;
+      main {
+        padding: 50px 100px;
+      }
+    }
 }
 </style>
