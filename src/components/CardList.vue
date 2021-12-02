@@ -47,7 +47,7 @@ export default {
             list-style: none;
             padding: 0;
             display: flex;
-            flex-wrap: wrap;
+            overflow-x: auto;
         }
     }
 </style>

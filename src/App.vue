@@ -2,7 +2,8 @@
     <div id="app">
         <Header @performSearch="getList" />
 
-        <main>
+        <Hero v-if="weeklyTrends" :list="weeklyTrends"/>
+        <main v-if="movieList || seriesList">
             <section class="lists">
                 <CardList
                     sectionTitle="Movies"
@@ -26,12 +27,16 @@
 import axios from 'axios'
 import Header from '@/components/Header.vue'
 import CardList from '@/components/CardList.vue'
+import Hero from '@/components/Hero.vue'
+
 export default {
     name: 'App',
     data() {
         return {
             APIurlMovie: 'https://api.themoviedb.org/3/search/movie',
             APIurlSeries: 'https://api.themoviedb.org/3/search/tv',
+            APIurlWeekTrends: 'https://api.themoviedb.org/3/trending/all/week',
+            weeklyTrends: null,
             movieList: null,
             seriesList: null,
             searchInput: null,
@@ -41,17 +46,35 @@ export default {
     components: {
         Header,
         CardList,
+        Hero,
+    },
+    created() {
+        axios.get(this.APIurlWeekTrends, {
+                params: {
+                api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                langauge: 'it-IT',
+            }
+        })
+        .then(response => {
+          console.log(response.data.results)
+            this.weeklyTrends = response.data.results.slice(0, 10);
+        })
+        .catch(error => {
+                    // handle error
+                    this.errorMessage = `${error} ==> Please try again`;
+        });
     },
     methods: {
         getList(searchInput) {
+            this.weeklyTrends = null;
             if(searchInput !== '') {
                 this.searchInput = searchInput;
                 axios.get(this.APIurlMovie, {
                     params: {
                         api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                         query: searchInput,
-                        language: 'it-IT',
-                    }
+                        langauge: 'it-IT'
+                    },
                 })
                 .then(response => {
                     // handle success
@@ -65,8 +88,8 @@ export default {
                     params: {
                         api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                         query: searchInput,
-                        language: 'it-IT',
-                    }
+                        langauge: 'it-IT'
+                    },
                 })
                 .then(response => {
                     // handle success
@@ -85,15 +108,17 @@ export default {
 
 <style lang="scss">
 body {
+  height: 100vh;
   color: white;
   margin: 0;
-  background-color: #212529;
+  background-color: rgb(33, 37, 41);
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     #app {
+      height: 100%;
       font-family: sans-serif;
       cursor: default;
       main {

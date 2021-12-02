@@ -70,7 +70,7 @@ export default {
 li.card {
     position: relative;
     margin: 30px 1px;
-    width: calc(100% / 6 - 2px);
+    min-width: calc(100% / 6 - 2px);
     .cover {
         width: 100%;
         img {

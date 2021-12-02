@@ -36,6 +36,9 @@ export default {
 
 <style scoped lang="scss">
 header {
+    width: 100%;
+    position: fixed;
+    top: 0;
     background-color: #1e2125;
     padding: 10px 50px;
     display: flex;
