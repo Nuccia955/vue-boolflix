@@ -38,9 +38,9 @@
             </div>
         </div>
         <CardList
-                    sectionTitle="Trends of the week"
-                    v-if="list"
-                    :list="list"
+            sectionTitle="Trends of the week"
+            v-if="list"
+            :list="list"
         />
     </section>
 </template>

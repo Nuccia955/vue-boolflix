@@ -1,8 +1,13 @@
 <template>
     <div id="app">
-        <Header @performSearch="getList" @performReturnHome ="getTrends"/>
+        <Header 
+            @performSearch="getList"    
+            @performTrendsOfTheWeek ="getTrends"
+        />
 
-        <Hero v-if="weeklyTrends" :list="weeklyTrends"/>
+        <Hero v-if="weeklyTrends"
+            :list="weeklyTrends"
+        />
         <main v-if="movieList || seriesList">
             <section class="lists">
                 <CardList

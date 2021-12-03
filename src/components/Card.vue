@@ -38,6 +38,14 @@
                     <i class="far fa-star"></i>
                 </span>
             </li>
+            <li class="actions">
+                <button class="btn play">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn more">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+            </li>
         </ul>
     </li>
 </template>
@@ -104,6 +112,30 @@ li.card {
                 height: 15px;
                 object-fit: cover;
             }
+        }
+        li.actions {
+            margin-top: 20px;
+            text-align: right;
+            .btn {
+                    font-size: 15px;
+                    color: rgb(220, 26, 40);
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    & > i {
+                        padding: 10px;
+                        border-radius: 50%;
+                        border: 2px solid currentColor;
+                    }
+                    &.more > i {
+                        border: none;
+                    }
+                    &:hover {
+                        color: rgba(220, 26, 40, 0.8);
+                        transform: scale(1.2);
+                        cursor: pointer;
+                    }
+                }
         }
     }
 }
