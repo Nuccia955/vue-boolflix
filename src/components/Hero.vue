@@ -1,9 +1,9 @@
 <template>
-    <section class="hero"
-        @mouseenter="stopAutoPlay"
-        @mouseleave="autoPlay" 
-    >
-        <div class="trend">
+    <section class="hero">
+        <div class="trend"
+            @mouseenter="stopAutoPlay"
+            @mouseleave="autoPlay" 
+        >
             <img :src="`https://image.tmdb.org/t/p/original${list[activeIndex].backdrop_path}`" :alt="`${list[activeIndex].title}`">
             <div v-if="stopSlider" class="trend-informations">
                 <h2>{{ list[activeIndex].title || list[activeIndex].name  }}</h2>
@@ -37,12 +37,21 @@
                 </div>
             </div>
         </div>
+        <CardList
+                    sectionTitle="Trends of the week"
+                    v-if="list"
+                    :list="list"
+        />
     </section>
 </template>
 
 <script>
+import CardList from '@/components/CardList.vue'
 export default {
     name: 'Hero',
+    components: {
+        CardList,
+    },
     data() {
         return {
             activeIndex: 0,

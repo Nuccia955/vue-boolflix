@@ -48,6 +48,7 @@ export default {
         return {
             flags: ['en', 'it'],
             stars: Math.ceil(this.voteAverage / 2),
+            genres: null
         }
     },
     computed: {

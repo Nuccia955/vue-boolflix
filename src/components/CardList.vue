@@ -1,7 +1,7 @@
 <template>
     <section class="list">
         <h2>{{ sectionTitle }}</h2>
-        <span> 
+        <span v-if="searchInput"> 
             <strong>{{ list.length }}</strong>
             results found for
             <strong>{{ searchInput }}</strong>

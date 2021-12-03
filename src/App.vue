@@ -57,7 +57,7 @@ export default {
         })
         .then(response => {
           console.log(response.data.results)
-            this.weeklyTrends = response.data.results.slice(0, 10);
+            this.weeklyTrends = response.data.results.slice(0, 20);
         })
         .catch(error => {
                     // handle error
@@ -76,19 +76,11 @@ export default {
                         langauge: 'it-IT'
                     },
                 })
-                .then(response => {
-                    // handle success
-                    this.movieList = response.data.results;
-                })
-                .catch(error => {
-                    // handle error
-                    this.errorMessage = `${error} ==> Please try again`;
-                });
                 axios.get(this.APIurlSeries, {
                     params: {
                         api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                         query: searchInput,
-                        langauge: 'it-IT'
+                        langauge: 'it-IT',
                     },
                 })
                 .then(response => {
