@@ -1,7 +1,8 @@
 <template>
     <li class="card">
         <div class="cover">
-            <img :src="`https://image.tmdb.org/t/p/w185${img}`" :alt="title">
+            <img v-if="img" :src="`https://image.tmdb.org/t/p/w185${img}`" :alt="title">
+            <img v-else :src="require('@/assets/placeholder.jpg')" :alt="title">
         </div>
         <ul>
             <li v-if="originalTitle !== title">

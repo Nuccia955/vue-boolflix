@@ -1,6 +1,7 @@
 <template>
     <header>
-        <div class="logo">
+        <div class="logo"
+            @click="returnHome">
             <img src="https://fontmeme.com/permalink/211201/4937b74c6317b36c509baa13669b4b20.png" alt="logo">
         </div>
         <div class="searchbar">
@@ -8,6 +9,7 @@
                 type="text" 
                 placeholder="Search movie or series"
                 v-model="searchInput"
+                @keyup.enter="search"
             >
             <button class="btn-search"
                 @click="search"
@@ -30,6 +32,9 @@ export default {
         search() {
             this.$emit('performSearch', this.searchInput)
         },
+        returnHome() {
+            this.$emit('performReturnHome')
+        }
     }
 }
 </script>

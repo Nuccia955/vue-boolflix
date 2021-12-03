@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header @performSearch="getList" />
+        <Header @performSearch="getList" @performReturnHome ="getTrends"/>
 
         <Hero v-if="weeklyTrends" :list="weeklyTrends"/>
         <main v-if="movieList || seriesList">
@@ -49,22 +49,26 @@ export default {
         Hero,
     },
     created() {
-        axios.get(this.APIurlWeekTrends, {
+        this.getTrends();
+    },
+    methods: {
+        getTrends() {
+            this.movieList = null;
+            this.seriesList = null;
+            axios.get(this.APIurlWeekTrends, {
                 params: {
                 api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                 langauge: 'it-IT',
             }
-        })
-        .then(response => {
-          console.log(response.data.results)
-            this.weeklyTrends = response.data.results.slice(0, 20);
-        })
-        .catch(error => {
-                    // handle error
-                    this.errorMessage = `${error} ==> Please try again`;
-        });
-    },
-    methods: {
+            })
+            .then(response => {
+                this.weeklyTrends = response.data.results.slice(0, 20);
+            })
+            .catch(error => {
+                        // handle error
+                        this.errorMessage = `${error} ==> Please try again`;
+            });
+        },
         getList(searchInput) {
             this.weeklyTrends = null;
             if(searchInput !== '') {
@@ -75,6 +79,12 @@ export default {
                         query: searchInput,
                         langauge: 'it-IT'
                     },
+                })
+                .then(response => {
+                    this.movieList = response.data.results
+                })
+                .catch(error => {
+                    this.errorMessage = `${error} ==> Please try again`;
                 })
                 axios.get(this.APIurlSeries, {
                     params: {
