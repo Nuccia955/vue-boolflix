@@ -39,6 +39,7 @@
         </div>
         <CardList
             sectionTitle="Trends of the week"
+            type="movie"
             v-if="list"
             :list="list"
         />

@@ -7,8 +7,9 @@
             <strong>{{ searchInput }}</strong>
         </span>
         <ul v-if="list.length > 0">
-            <Card  
-                v-for="item in list" 
+            <Card
+                v-for="(item) in list"
+                :genres="getGenres(item.id, type)"
                 :key="item.id"
                 :img="item.poster_path"
                 :title="item.title || item.name"
@@ -22,17 +23,40 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Card from '@/components/Card.vue'
 export default {
     name: 'CardList',
     props: {
         list: Array,
         sectionTitle: String,
+        type: String,
         searchInput: String,
     },
     components: {
         Card,
-    } 
+    },
+    methods: {
+        getGenres(id, type) {
+            console.log('id', id)
+            axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
+                params: {
+                    api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                    langauge: 'it-IT',
+                }
+            })
+            .then(response => {
+                this.genres = response.data.genres
+                console.log('genres', this.genres)
+                return this.genres
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+    }
+    
 }
 </script>
 

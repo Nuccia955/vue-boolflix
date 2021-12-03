@@ -12,12 +12,14 @@
             <section class="lists">
                 <CardList
                     sectionTitle="Movies"
+                    type="movie"
                     v-if="movieList"
                     :list="this.movieList"
                     :searchInput="searchInput"
                 />
                 <CardList
-                    sectionTitle="Series"
+                    sectionTitle="series"
+                    type="series"
                     v-if="seriesList"
                     :list="this.seriesList"
                     :searchInput="searchInput"
@@ -40,7 +42,7 @@ export default {
         return {
             APIurlMovie: 'https://api.themoviedb.org/3/search/movie',
             APIurlSeries: 'https://api.themoviedb.org/3/search/tv',
-            APIurlWeekTrends: 'https://api.themoviedb.org/3/trending/all/week',
+            APIurlWeekTrends: 'https://api.themoviedb.org/3/trending/movie/week',
             weeklyTrends: null,
             movieList: null,
             seriesList: null,
@@ -64,14 +66,14 @@ export default {
                 params: {
                 api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                 langauge: 'it-IT',
-            }
+                }
             })
             .then(response => {
                 this.weeklyTrends = response.data.results.slice(0, 20);
             })
             .catch(error => {
-                        // handle error
-                        this.errorMessage = `${error} ==> Please try again`;
+                // handle error
+                this.errorMessage = `${error} ==> Please again`;
             });
         },
         getList(searchInput) {

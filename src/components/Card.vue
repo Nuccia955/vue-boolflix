@@ -1,7 +1,7 @@
 <template>
     <li class="card">
         <div class="cover">
-            <img v-if="img" :src="`https://image.tmdb.org/t/p/w185${img}`" :alt="title">
+            <img v-if="img" :src="`https://image.tmdb.org/t/p/w342${img}`" :alt="title">
             <img v-else :src="require('@/assets/placeholder.jpg')" :alt="title">
         </div>
         <ul>
@@ -38,6 +38,12 @@
                     <i class="far fa-star"></i>
                 </span>
             </li>
+            <li class="genres">
+                Genere:
+                <span v-for="genre in genres" :key="genre.id">
+                    {{ genre.name }}
+                </span>
+            </li>
             <li class="actions">
                 <button class="btn play">
                         <i class="fas fa-play"></i>
@@ -57,7 +63,6 @@ export default {
         return {
             flags: ['en', 'it'],
             stars: Math.ceil(this.voteAverage / 2),
-            genres: null
         }
     },
     computed: {
@@ -72,6 +77,7 @@ export default {
         language: String,
         overview: String,
         voteAverage: Number,
+        genres: Array,
     },
 }
 </script>
