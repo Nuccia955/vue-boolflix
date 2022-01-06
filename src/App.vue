@@ -8,6 +8,7 @@
         <Hero v-if="weeklyTrends"
             :list="weeklyTrends"
         />
+
         <main v-if="movieList || seriesList">
             <section class="lists">
                 <CardList
@@ -116,6 +117,29 @@ export default {
 </script>
 
 <style lang="scss">
+::-webkit-scrollbar{
+    width: .5em ;
+    height: .5em ;
+}    
+
+::-webkit-scrollbar-track {
+    background-color: rgb(154, 38, 46);
+    border-radius: 0.50em;
+    margin-block: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color:rgb(220, 26, 40);
+    border-radius: 0.50em;
+    margin-block: 10px;
+}
+
+@supports (scrollbar-color:rgb(220, 26, 40) rgb(154, 38, 46)) {
+    * {
+        scrollbar-color:rgb(220, 26, 40) rgb(154, 38, 46) ;
+        scrollbar-width: thin;
+    }
+}
 body {
   height: 100vh;
   color: white;

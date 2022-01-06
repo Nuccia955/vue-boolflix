@@ -38,17 +38,12 @@
                     <i class="far fa-star"></i>
                 </span>
             </li>
-            <li class="genres">
-                Genere:
-                <span v-for="genre in genres" :key="genre.id">
-                    {{ genre.name }}
-                </span>
-            </li>
             <li class="actions">
                 <button class="btn play">
                         <i class="fas fa-play"></i>
                     </button>
-                    <button class="btn more">
+                    <button class="btn more"
+                        @click="getMore(id, type)">
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
             </li>
@@ -57,6 +52,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'Card',
     data() {
@@ -77,8 +73,27 @@ export default {
         language: String,
         overview: String,
         voteAverage: Number,
-        genres: Array,
+        type: String,
+        id: Number,
     },
+    methods: {
+        getMore(id, type) {
+            console.log('id', id)
+            axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
+                params: {
+                    api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                    langauge: 'it-IT',
+                }
+            })
+            .then(response => {
+                console.log('genres', response.data.genres)
+                this.$emit('performeMore', response.data.genres)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+    }
 }
 </script>
 

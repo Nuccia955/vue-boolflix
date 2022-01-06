@@ -6,11 +6,15 @@
             results found for
             <strong>{{ searchInput }}</strong>
         </span>
-        <ul v-if="list.length > 0">
+        <ul v-if="list.length > 0"
+            @wheel.prevent="scrollingY"    
+            :class="`show-case ${type}`"
+        >
             <Card
                 v-for="(item) in list"
-                :genres="getGenres(item.id, type)"
+                :type="type"
                 :key="item.id"
+                :id="item.id"
                 :img="item.poster_path"
                 :title="item.title || item.name"
                 :originalTitle="item.original_title || item.original_name"
@@ -23,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Card from '@/components/Card.vue'
 export default {
     name: 'CardList',
@@ -37,26 +40,14 @@ export default {
         Card,
     },
     methods: {
-        getGenres(id, type) {
-            console.log('id', id)
-            axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
-                params: {
-                    api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
-                    langauge: 'it-IT',
-                }
-            })
-            .then(response => {
-                this.genres = response.data.genres
-                console.log('genres', this.genres)
-                return this.genres
-
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        scrollingY(e) {
+            if(e.wheelDelta > 0) {
+                document.querySelector(`.show-case.${this.type}`).scrollLeft -= 100
+            } else {
+                document.querySelector(`.show-case.${this.type}`).scrollLeft += 100
+            }
         }
     }
-    
 }
 </script>
 
