@@ -8,7 +8,7 @@
         <h2 class="title">
             {{ title }}
         </h2>
-        <span class="adult" v-if="adult !== null">
+        <span class="adult" v-if="adult !== null && adult !== undefined">
             <i class="fas fa-circle"
                 :class="[{green : adult === false}, red]"
             ></i>

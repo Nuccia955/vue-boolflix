@@ -106,7 +106,7 @@ export default {
             .then(response => {
                 this.genres = response.data.genres;
                 this.releaseDate = response.data.release_date || response.data.last_air_date;
-                if(response.data.adult) {
+                if(response.data.adult !== null) {
                     this.adult = response.data.adult;
                 }
             })
