@@ -79,7 +79,7 @@ export default {
         stopAutoPlay() {
             clearInterval(this.autoplayID);
             this.stopSlider = true
-        }
+        },
     }
 }
 </script>

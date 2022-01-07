@@ -6,15 +6,15 @@
         </div>
         <ul>
             <li v-if="originalTitle !== title">
-                Titolo:
+                Title:
                 {{ title }}
             </li>
             <li>
-                Titolo Originale:
+                Original Title:
                 {{ originalTitle }} 
             </li>
             <li class="flag">
-                Lingua Originale:
+                Original Language:
                 <img 
                     v-if="availableFlag" 
                     :src="require(`../assets/${language}.png`)" :alt="language"
@@ -25,7 +25,7 @@
                 <p>{{ overview }}</p>
             </li>
             <li>
-                Voto:
+                Vote:
                 <span class="star" 
                     v-for="(star,index) in stars" 
                     :key="`star-${index}`" 
@@ -48,10 +48,22 @@
                     </button>
             </li>
         </ul>
+        <CardSchedule v-if="genres && cast"
+            @performCloseBtn="closeSchedule"
+            :genres="genres"
+            :cast="cast"
+            :title="title"
+            :overview="overview"
+            :language="language"
+            :voteAverage="voteAverage"
+            :adult="adult"
+            :releaseDate="releaseDate"
+        />
     </li>
 </template>
 
 <script>
+import CardSchedule from '@/components/CardSchedule.vue'
 import axios from 'axios'
 export default {
     name: 'Card',
@@ -59,7 +71,14 @@ export default {
         return {
             flags: ['en', 'it'],
             stars: Math.ceil(this.voteAverage / 2),
+            genres : null,
+            cast: null,
+            releaseDate: null,
+            adult: null,
         }
+    },
+    components: {
+        CardSchedule,
     },
     computed: {
         availableFlag() {
@@ -78,20 +97,39 @@ export default {
     },
     methods: {
         getMore(id, type) {
-            console.log('id', id)
-            axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
+            axios.get(`https://api.themoviedb.org/3/${type === 'movie' ? type : 'tv'}/${id}`, {
                 params: {
                     api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
                     langauge: 'it-IT',
                 }
             })
             .then(response => {
-                console.log('genres', response.data.genres)
-                this.$emit('performeMore', response.data.genres)
+                this.genres = response.data.genres;
+                this.releaseDate = response.data.release_date || response.data.last_air_date;
+                if(response.data.adult) {
+                    this.adult = response.data.adult;
+                }
             })
             .catch(error => {
                 console.log(error)
             })
+            axios.get(`https://api.themoviedb.org/3/${type === 'movie' ? type : 'tv'}/${id}/credits`, {
+                params: {
+                    api_key: '9523b234fd1c8550cfc9dea66c01f6f2',
+                    langauge: 'it-IT',
+                }
+            })
+            .then(response => {
+                this.cast = response.data.cast;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            this.$emit('stopScrollX')
+        },
+        closeSchedule() {
+            this.genres = null;
+            this.$emit('startScrollX')
         }
     }
 }

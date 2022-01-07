@@ -54,7 +54,7 @@ export default {
     components: {
         Header,
         CardList,
-        Hero,
+        Hero
     },
     created() {
         this.getTrends();
@@ -156,6 +156,9 @@ body {
       cursor: default;
       main {
         padding: 50px 100px;
+      }
+      .btn {
+        cursor: pointer;
       }
     }
 }

@@ -7,7 +7,7 @@
             <strong>{{ searchInput }}</strong>
         </span>
         <ul v-if="list.length > 0"
-            @wheel.prevent="scrollingY"    
+            @wheel="scrollingY"
             :class="`show-case ${type}`"
         >
             <Card
@@ -21,6 +21,8 @@
                 :language="item.original_language"
                 :overview="item.overview"
                 :voteAverage="item.vote_average"
+                @stopScrollX="scrollX = false"
+                @startScrollX='scrollX = true'
             />
         </ul>
     </section>
@@ -30,6 +32,11 @@
 import Card from '@/components/Card.vue'
 export default {
     name: 'CardList',
+    data() {
+        return {
+            scrollX: true,
+        }
+    },
     props: {
         list: Array,
         sectionTitle: String,
@@ -41,10 +48,13 @@ export default {
     },
     methods: {
         scrollingY(e) {
-            if(e.wheelDelta > 0) {
-                document.querySelector(`.show-case.${this.type}`).scrollLeft -= 100
-            } else {
-                document.querySelector(`.show-case.${this.type}`).scrollLeft += 100
+            if(this.scrollX) {
+                e.preventDefault();
+                if(e.wheelDelta > 0) {
+                    document.querySelector(`.show-case.${this.type}`).scrollLeft -= 100;
+                } else {
+                    document.querySelector(`.show-case.${this.type}`).scrollLeft += 100;
+                }
             }
         }
     }
